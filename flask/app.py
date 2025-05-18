@@ -16,6 +16,10 @@ def welcome():
 def hello():
     return "Hello, World!"
 
+@app.route("/about")
+def about():
+    return "This is a simple Flask application that serves a static HTML page."
+
 if __name__ == '__main__':
     app.run(debug=True)
 
