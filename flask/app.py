@@ -10,8 +10,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def welcome():
-    return "Welcome to flask course"
+    return "Welcome to flask course,This is a simple Flask application."
+
+@app.route("/hello")
+def hello():
+    return "Hello, World!"
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
