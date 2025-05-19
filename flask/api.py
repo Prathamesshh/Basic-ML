@@ -53,6 +53,14 @@ def update_todo(todo_id):
     todo['done'] = request.json.get('done', todo['done'])
     return jsonify(todo)
 
+## delete : delete a todo
+@app.route('/todos/<int:todo_id>', methods=['DELETE'])
+def delete_todo(todo_id):
+    global todos
+    todos = [todo for todo in todos if todo['id'] != todo_id]
+    return jsonify({'result': True})
+
+## run the app
 if __name__ == '__main__':
     app.run(debug=True)
 
