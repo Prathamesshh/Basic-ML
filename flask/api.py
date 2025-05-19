@@ -43,6 +43,15 @@ def create_todo():
     todos.append(new_todo)
     return jsonify(new_todo), 201
 
+## put : update a todo
+@app.route('/todos/<int:todo_id>', methods=['PUT'])
+def update_todo(todo_id):
+    todo = next((todo for todo in todos if todo['id'] == todo_id), None)
+    if todo is None:
+        return jsonify({'error': 'Todo not found'}), 404
+    todo['name'] = request.json.get('task', todo['name'])
+    todo['done'] = request.json.get('done', todo['done'])
+    return jsonify(todo)
 
 if __name__ == '__main__':
     app.run(debug=True)
