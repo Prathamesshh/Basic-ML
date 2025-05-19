@@ -64,3 +64,5 @@ def delete_todo(todo_id):
 if __name__ == '__main__':
     app.run(debug=True)
 
+# This code creates a simple Flask API for managing a to-do list.
+
