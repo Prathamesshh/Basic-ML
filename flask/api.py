@@ -37,7 +37,7 @@ def create_todo():
         return jsonify({'error': 'Bad Request'})
     new_todo = {
         'id': todos[-1]['id'] +1,
-        'name': request.json['task'],
+        'task': request.json['task'],
         'done': False
     }
     todos.append(new_todo)
@@ -49,7 +49,7 @@ def update_todo(todo_id):
     todo = next((todo for todo in todos if todo['id'] == todo_id), None)
     if todo is None:
         return jsonify({'error': 'Todo not found'}), 404
-    todo['name'] = request.json.get('task', todo['name'])
+    todo['task'] = request.json.get('task', todo['task'])
     todo['done'] = request.json.get('done', todo['done'])
     return jsonify(todo)
 
