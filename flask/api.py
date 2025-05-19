@@ -19,6 +19,15 @@ def home():
 def get_todos():
     return jsonify(todos)
 
+## Get a single todo by id
+@app.route('/todos/<int:todo_id>',methods=['GET'])
+def get_todo(todo_id):
+    todo = next((todo for todo in todos if todo['id'] == todo_id), None)
+    if todo:
+        return jsonify(todo)
+    else:
+        return jsonify({'error': 'Todo not found'}), 404
+
 if __name__ == '__main__':
     app.run(debug=True)
 
