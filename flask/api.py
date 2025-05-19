@@ -19,6 +19,7 @@ def home():
 def get_todos():
     return jsonify(todos)
 
+
 ## Get a single todo by id
 @app.route('/todos/<int:todo_id>',methods=['GET'])
 def get_todo(todo_id):
@@ -27,6 +28,21 @@ def get_todo(todo_id):
         return jsonify(todo)
     else:
         return jsonify({'error': 'Todo not found'}), 404
+
+  
+## post :create a new todo
+@app.route('/todos', methods=['POST'])
+def create_todo():
+    if not request.json or 'task' not in request.json:
+        return jsonify({'error': 'Bad Request'})
+    new_todo = {
+        'id': todos[-1]['id'] +1,
+        'name': request.json['task'],
+        'done': False
+    }
+    todos.append(new_todo)
+    return jsonify(new_todo), 201
+
 
 if __name__ == '__main__':
     app.run(debug=True)
